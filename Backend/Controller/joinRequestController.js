@@ -2,7 +2,7 @@ const express = require("express");
 const JoinRequest = require('../models/JoinRequest');
 const Club = require("../models/Club");
 const User = require("../models/User");
-const { JWT_EXPIRATION, JWT_SECRET } = require("../config/constants");
+const { JWT_EXPIRATION, JWT_SECRET } = require("../config/constants.js");
 const jwt = require('jsonwebtoken'); 
 
 

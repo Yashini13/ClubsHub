@@ -6,6 +6,7 @@ const session = require('express-session');
 const authRoutes = require('./routes/authRoutes');
 const clubRoutes=require('./routes/clubRoutes')
 const eventRoutes=require('./routes/eventRoutes')
+// const myClubs = require('./routes/myClubsRoute')
 
 const app = express();
 
@@ -41,6 +42,7 @@ app.use(require('cookie-parser')());
 app.use('/api/auth', authRoutes);
 app.use('/api/club',clubRoutes)
 app.use('/api/event',eventRoutes)
+// app.use('/api/my-clubs',myClubs)
 
 app.use((err, req, res, next) => {
   console.error(err.stack);
