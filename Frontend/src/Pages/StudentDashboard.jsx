@@ -1,9 +1,15 @@
 import React from 'react'
-import Navbar from '../components/Navbar'
+
 
 const StudentDashboard = () => {
   return (
     <div>
+<<<<<<< HEAD
+=======
+
+    studentDashbaord
+      
+>>>>>>> upstream/main
     </div>
   )
 }

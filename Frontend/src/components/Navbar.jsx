@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 // import React, { useState, useContext } from 'react';
 // import { Link } from 'react-router-dom';
 // import { AuthContext } from '../AuthContext';
@@ -128,6 +129,8 @@
 // };
 
 // export default Navbar;
+=======
+>>>>>>> upstream/main
 
 
 import React, { useState, useContext } from 'react';
@@ -153,13 +156,22 @@ const Navbar = () => {
       <nav className="sticky top-0 z-50 bg-white shadow-lg ">
         <div className="max-w-7xl mx-auto px-4">
           <div className="flex justify-between h-16">
+<<<<<<< HEAD
             {/* Logo Section */}
+=======
+         
+>>>>>>> upstream/main
             <div className="flex">
               <div className="flex-shrink-0 flex items-center">
-                <span className="text-2xl font-bold text-indigo-600">StudentHub</span>
+                <span className="text-2xl font-bold text-indigo-600">ClubsHub</span>
               </div>
+<<<<<<< HEAD
 0
               {/* Desktop Nav Items */}
+=======
+
+             
+>>>>>>> upstream/main
               <div className="hidden md:flex md:ml-6 md:space-x-4">
                 {navItems.map((item) => (
                   <Link
@@ -174,13 +186,21 @@ const Navbar = () => {
               </div>
             </div>
 
+<<<<<<< HEAD
             {/* Right Side */}
+=======
+          
+>>>>>>> upstream/main
             <div className="flex items-center">
               <button className="p-2 text-gray-600 hover:text-indigo-600 rounded-full hover:bg-gray-100">
                 <Bell className="h-6 w-6" />
               </button>
 
+<<<<<<< HEAD
               {/* Profile Dropdown */}
+=======
+            
+>>>>>>> upstream/main
               <div className="ml-3 relative">
                 <button
                   onClick={() => setIsProfileDropdownOpen(!isProfileDropdownOpen)}
@@ -211,7 +231,11 @@ const Navbar = () => {
                 )}
               </div>
 
+<<<<<<< HEAD
               {/* Mobile Menu Toggle */}
+=======
+          
+>>>>>>> upstream/main
               <div className="flex items-center md:hidden ml-4">
                 <button
                   onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
@@ -228,7 +252,11 @@ const Navbar = () => {
           </div>
         </div>
 
+<<<<<<< HEAD
         {/* Mobile Nav Items */}
+=======
+ 
+>>>>>>> upstream/main
         {isMobileMenuOpen && (
           <div className="md:hidden">
             <div className="pt-2 pb-3 space-y-1">
@@ -247,9 +275,15 @@ const Navbar = () => {
         )}
       </nav>
 
+<<<<<<< HEAD
       {/* Main Content */}
       <div className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
         {/* Add your content here */}
+=======
+    
+      <div className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
+       
+>>>>>>> upstream/main
       </div>
     </>
   );
