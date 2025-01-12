@@ -30,17 +30,27 @@ const getClubDetails = async (req, res) => {
 // Fetch clubs affiliated with the logged-in user
 const getUserAffiliatedClubs = async (req, res) => {
   try {
-    const user = await User.findById(req.user.id).populate(
-      "clubAffiliations.clubId",
-      "name clubLogo description"
-    );
-    if (!user) {
-      return res.status(404).json({ error: "User not found" });
+    const token = getTokenFromRequest(req);
+    if (!token) {
+        return res.status(401).json({ message: "Authentication token is missing" });
     }
+
+    const decoded = jwt.verify(token, JWT_SECRET);
+    const userId = decoded.id;
+
+    const user = await User.findById(userId).populate(
+        "clubAffiliations.clubId",
+        "name clubLogo description"
+    );
+
+    if (!user) {
+        return res.status(404).json({ message: "User not found" });
+    }
+
     res.status(200).json(user.clubAffiliations.map((aff) => aff.clubId));
-  } catch (error) {
-    res.status(500).json({ error: "Error fetching affiliated clubs" });
-  }
+} catch (error) {
+    res.status(500).json({ message: "Error fetching affiliated clubs", error: error.message });
+}
 };
 
 // Create a new club

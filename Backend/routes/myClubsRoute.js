@@ -18,7 +18,7 @@ router.get("/", auth, getAllClubs);
 router.get("/:id", auth, getClubDetails);
 
 // Get clubs affiliated with a specific user
-router.get("/user/affiliated", auth, getUserAffiliatedClubs);
+router.get("/my-clubs", auth, getUserAffiliatedClubs);
 
 // Create a new club
 router.post(

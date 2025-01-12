@@ -12,6 +12,7 @@ import ClubDetails from "./Pages/ClubDetails";
 import Events from "./Pages/Events";
 import EventInfo from "./Pages/EventInfo";
 import Navbar from "./components/Navbar";
+import MyClubs from "./Pages/MyClubs";
 
 const App = () => {
   return (
@@ -55,6 +56,7 @@ const App = () => {
             <Route path="/events/:id" element={<EventInfo />} />
 
             <Route path="/club/:id" element={<ClubDetails />} />
+            <Route path="/my-clubs/:id" element={<MyClubs />} />
           </Routes>
         </Router>
       </AuthProvider>

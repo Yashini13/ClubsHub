@@ -158,7 +158,7 @@ const Navbar = () => {
               <div className="flex-shrink-0 flex items-center">
                 <span className="text-2xl font-bold text-indigo-600">StudentHub</span>
               </div>
-
+0
               {/* Desktop Nav Items */}
               <div className="hidden md:flex md:ml-6 md:space-x-4">
                 {navItems.map((item) => (

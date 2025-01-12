@@ -13,7 +13,7 @@ const MyClubs = () => {
   const getUserClubs = async () => {
     setIsLoading(true);
     try {
-      const { data } = await axios.get('http://localhost:5173/my-clubs', { withCredentials: true });
+      const { data } = await axios.get('http://localhost:3000/api/clubs', { withCredentials: true });
       setClubs(data.clubs);
       setError(null);
     } catch (error) {
