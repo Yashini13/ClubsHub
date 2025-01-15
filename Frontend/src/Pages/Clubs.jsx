@@ -1,8 +1,4 @@
 
-<<<<<<< HEAD
-=======
-
->>>>>>> upstream/main
 import { useState, useEffect, useContext } from "react";
 import { Users, User, ArrowRight, Search, Activity, Sparkles, AlertCircle } from "lucide-react";
 import { useNavigate } from "react-router-dom";

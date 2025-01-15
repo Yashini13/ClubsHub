@@ -6,7 +6,8 @@ const {
   addMemberToClub,
   getClubDetails,
   getUserAffiliatedClubs,
-} = require("../Controller/clubController");
+} = require("../Controller/myClubController.js");
+
 
 const { auth, authorize } = require("../middleware/authMiddleware");
 const { uploadLogo } = require("../middleware/uploadMiddleware");

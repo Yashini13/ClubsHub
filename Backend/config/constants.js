@@ -3,6 +3,7 @@ const UserRoles = {
   CLUB_ADMIN: 'clubAdmin',
   FACULTY_COORDINATOR: 'facultyCoordinator',
   SUPER_ADMIN: 'superAdmin',
+  HOD: 'HOD'
 };
 
 

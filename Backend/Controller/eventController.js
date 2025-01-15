@@ -530,6 +530,24 @@ const getPendingEventsForFaculty = async (req, res) => {
         });
     }
 };
+// Get Events 
+const getEvents = async (req, res) => {
+    try {
+      const currentDate = new Date();
+  
+      // Fetch past and upcoming events
+      const pastEvents = await Event.find({ date: { $lt: currentDate } }).sort({
+        date: -1,
+      });
+      const upcomingEvents = await Event.find({
+        date: { $gte: currentDate },
+      }).sort({ date: 1 });
+  
+      res.status(200).json({ pastEvents, upcomingEvents });
+    } catch (error) {
+      res.status(500).json({ message: "Failed to fetch events", error });
+    }
+  };
 
 // Get approved events (visible to all)
 const getApprovedEvents = async (req, res) => {
@@ -767,8 +785,8 @@ module.exports = {
     getPendingEventsForFaculty,
     getApprovedEvents,
     trackEventProgress,
-    getEventById
-    
+    getEventById,
+    getEvents
 };
 
 

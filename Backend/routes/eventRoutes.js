@@ -8,7 +8,9 @@ const { createEvent,
     getPendingEventsForFaculty,
     getApprovedEvents,
     getEventById,
-    trackEventProgress } = require('../Controller/eventController');
+    trackEventProgress,
+    getEvents
+  } = require('../Controller/eventController');
 const { uploadEventFiles } = require('../middleware/uploadMiddleware');
 
 
@@ -22,5 +24,8 @@ router.get('/approved', auth,authorize(['superAdmin','clubAdmin','facultyCoordin
 router.get('/track-progress',auth,authorize(['clubAdmin']), trackEventProgress);
 router.get('/:id',auth,authorize(['superAdmin','clubAdmin','facultyCoordinator','member']),getEventById)
 
+
+// fOR hod
+router.get("/", auth, authorize(["HOD"]), getEvents);
 
 module.exports = router;

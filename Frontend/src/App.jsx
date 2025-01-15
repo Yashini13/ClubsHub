@@ -1,5 +1,4 @@
-import React from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+
 import React from "react";
 import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
 
@@ -18,6 +17,8 @@ import Navbar from "./components/Navbar";
 import FacultyDashboard from "./Pages/FacultyDashboard";
 import SuperAdminDashboard from "./Pages/SuperAdminDashboard"
 import CreateEvent from "./components/CreateEvent";
+import MyClubs from './Pages/MyClubs'; // Ensure the component is imported
+
 
 
 const AppContent = () => {
@@ -86,10 +87,19 @@ const AppContent = () => {
             </PrivateRoute>
           }
         />
+         <Route
+          path="/my-clubs"
+          element={
+            <PrivateRoute roles={["member"]}>
+              <MyClubs />
+            </PrivateRoute>
+          }
+        />
         <Route path="/clubs" element={<Clubs />} />
         <Route path="/events" element={<Events />} />
         <Route path="/events/:id" element={<EventInfo />} />
         <Route path="/club/:id" element={<ClubDetails />} />
+       
       </Routes>
     </>
   );

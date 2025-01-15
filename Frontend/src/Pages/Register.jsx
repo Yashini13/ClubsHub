@@ -219,6 +219,8 @@ const Register = () => {
               <option value="clubAdmin">Club Admin</option>
               <option value="superAdmin">Super Admin</option>
               <option value='facultyCoordinator'> Faculty Coordinater</option>
+              <option value='HOD'> Head Of Department</option>
+
             </select>
           </div>
 
