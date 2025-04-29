@@ -9,6 +9,7 @@ import StudentDashboard from "./Pages/StudentDashboard";
 import PrivateRoute from "./components/PrivateRoute";
 import Profile from "./Pages/Profile";
 import Clubs from "./Pages/Clubs";
+import MyClubs from "./Pages/MyClub.jsx";
 import ClubDetails from "./Pages/ClubDetails";
 import Events from "./Pages/Events";
 import EventInfo from "./Pages/EventInfo";
@@ -17,6 +18,8 @@ import FacultyDashboard from "./Pages/FacultyDashboard";
 import SuperAdminDashboard from "./Pages/SuperAdminDashboard"
 import CreateEvent from "./components/CreateEvent";
 import Calendar from "./components/Calender";
+import MyActivity from "./Pages/Activity.jsx"
+import { Activity } from "lucide-react";
 
 
 const AppContent = () => {
@@ -59,6 +62,23 @@ const AppContent = () => {
           }
         />
 
+        <Route
+          path="/activity"
+          element={
+            <PrivateRoute roles={["member"]}>
+              <MyActivity />
+            </PrivateRoute>
+          }
+        />
+
+        <Route
+          path="/my-clubs"
+          element={
+            <PrivateRoute roles={["member"]}>
+              <MyClubs />
+            </PrivateRoute>
+          }
+        />
 
 <Route  path='/faculty-coordinater-dashboard' 
           element={

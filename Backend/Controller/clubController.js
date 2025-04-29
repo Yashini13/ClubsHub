@@ -27,7 +27,6 @@ const getAllClubs = async (req, res) => {
 };
 
 
-
 const getClubDetails = async (req, res) => {
     try {
         const clubs = await Club.find()
@@ -57,8 +56,6 @@ const getClubDetails = async (req, res) => {
         });
     }
 };
-
-
 
 
 const createClub = async (req, res) => {
@@ -240,9 +237,56 @@ const addMemberToClub = async (req, res) => {
     }
 };
 
+// Add this to your clubController.js file
+
+const getUserClubs = async (req, res) => {
+    try {
+        // Get user ID from authenticated request
+        const userId = req.user._id;
+
+        if (!userId) {
+            return res.status(401).json({
+                success: false,
+                message: 'Authentication required'
+            });
+        }
+
+        // Find clubs where the user is a member
+        const userClubs = await Club.find({
+            'clubMembers.student': userId
+        })
+        .populate('clubLeadId', 'name email department')
+        .populate('facultyCoordinater', 'name email department')
+        .populate('clubMembers.student', 'name email department');
+
+        return res.status(200).json({
+            success: true,
+            data: userClubs
+        });
+    } catch (error) {
+        console.error('Error fetching user clubs:', error);
+        return res.status(500).json({
+            success: false,
+            message: 'Error fetching user clubs',
+            error: error.message
+        });
+    }
+};
+
+// Add getUserClubs to your module.exports
 module.exports = {
     getAllClubs,
     createClub,
     addMemberToClub,
-    getClubDetails 
+    getClubDetails,
+    getUserClubs  // Make sure this is included
+};
+
+
+module.exports = {
+    getAllClubs,
+    createClub,
+    addMemberToClub,
+    getClubDetails,
+    getUserClubs
 };

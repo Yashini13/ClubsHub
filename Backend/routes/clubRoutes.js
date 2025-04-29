@@ -1,12 +1,83 @@
+// const express = require("express");
+// const router = express.Router();
+
+
+// const { 
+//     getAllClubs, 
+//     createClub, 
+//     addMemberToClub, 
+//     getClubDetails 
+// } = require("../Controller/clubController");
+
+// const {
+//     sendJoinRequest,
+//     getAllrequests,
+//     respondToJoinRequest,
+//     getUserJoinReq
+// } = require("../Controller/joinRequestController");
+
+
+// const { auth, authorize } = require('../middleware/authMiddleware');
+// const { uploadLogo } = require('../middleware/uploadMiddleware');
+
+
+// router.get('/', getAllClubs);
+// router.get('/:id', getClubDetails);
+// router.post(
+//     '/create',
+//     auth,
+//     authorize(['superAdmin']),
+//     uploadLogo,
+//     createClub
+// );
+// router.post(
+//     '/add-member', 
+//     auth, 
+//     authorize([ 'clubAdmin']), 
+//     addMemberToClub
+// );
+
+
+// router.post(
+//     '/:clubId/join-request',
+//     auth,
+//     authorize(['member']),
+//     sendJoinRequest
+// );
+
+// router.get(
+//     '/:clubId/join-request',
+//     auth,
+//     authorize(['clubAdmin']),
+//     getAllrequests
+// );
+
+// router.get(
+//     '/join-requests',  
+//     auth,
+//     authorize(['member']),
+//     getUserJoinReq    
+// );
+
+// router.post(
+//     '/:clubId/respond',
+//     auth,
+//     authorize(['clubAdmin']),
+//     respondToJoinRequest
+// );
+
+// module.exports = router;
+
 const express = require("express");
 const router = express.Router();
 
-
-const { 
-    getAllClubs, 
-    createClub, 
-    addMemberToClub, 
-    getClubDetails 
+const {
+    getAllClubs,
+    createClub,
+    addMemberToClub,
+    getClubDetails,
+    // Make sure getUserClubs is actually exported from your controller
+    getUserClubs
 } = require("../Controller/clubController");
 
 const {
@@ -16,13 +87,15 @@ const {
     getUserJoinReq
 } = require("../Controller/joinRequestController");
 
-
 const { auth, authorize } = require('../middleware/authMiddleware');
 const { uploadLogo } = require('../middleware/uploadMiddleware');
 
+// Check that getUserClubs exists before using it here
+router.get('/user/my-clubs', auth, getUserClubs);
 
 router.get('/', getAllClubs);
 router.get('/:id', getClubDetails);
+
 router.post(
     '/create',
     auth,
@@ -30,13 +103,13 @@ router.post(
     uploadLogo,
     createClub
 );
+
 router.post(
-    '/add-member', 
-    auth, 
-    authorize([ 'clubAdmin']), 
+    '/add-member',
+    auth,
+    authorize(['clubAdmin']),
     addMemberToClub
 );
-
 
 router.post(
     '/:clubId/join-request',
@@ -53,10 +126,10 @@ router.get(
 );
 
 router.get(
-    '/join-requests',  
+    '/join-requests',
     auth,
     authorize(['member']),
-    getUserJoinReq    
+    getUserJoinReq
 );
 
 router.post(

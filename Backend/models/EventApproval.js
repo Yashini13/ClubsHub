@@ -1,5 +1,4 @@
 
-
 // const eventApprovalSchema = new mongoose.Schema({
 //   eventId: {
 //     type: mongoose.Schema.Types.ObjectId,
