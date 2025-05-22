@@ -9,6 +9,9 @@ const eventRoutes=require('./routes/eventRoutes')
 const announcement=require('./routes/announcementRoutes')
 const competition=require('./routes/competitionRoutes')
 
+const competitionRoutes = require('./routes/activityRoute.js');
+app.use('/api/competitions', competitionRoutes);
+
 const app = express();
 
 connectDB();

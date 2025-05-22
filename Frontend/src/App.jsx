@@ -17,12 +17,10 @@ import FacultyDashboard from "./Pages/FacultyDashboard";
 import SuperAdminDashboard from "./Pages/SuperAdminDashboard"
 import CreateEvent from "./components/CreateEvent";
 import Calendar from "./components/Calender";
-
+import ActivityPage from "./Pages/Activity";
 import CreateAnnouncement from "./Pages/CreateAnnouncement";
 import EditAnnouncement from "./Pages/EditAnnouncement";
 import ListAnnouncement from "./Pages/ListAnnouncements";
-
-
 
 const AppContent = () => {
   const location = useLocation();
@@ -80,7 +78,14 @@ const AppContent = () => {
             </PrivateRoute>
           }
           />
-
+          <Route
+          path="/activity"
+          element={
+            <PrivateRoute roles={["member"]}>
+              <ActivityPage/>
+            </PrivateRoute>
+          }
+        />
 
         <Route
           path="/profile"
@@ -128,12 +133,6 @@ const AppContent = () => {
     </PrivateRoute>
   }
 /> */}
-
-
-
-
-
-
 
 
         <Route path="/clubs" element={<Clubs />} />
