@@ -1,13 +1,16 @@
 const express = require("express");
 const router = express.Router();
+const JoinRequest=require("../models/JoinRequest")
 
 
 const { 
     getAllClubs, 
     createClub, 
-    addMemberToClub, 
+    assignRoleToClubMember, 
     getClubDetails ,
-    clubAdminUsingID
+    clubAdminUsingID,
+     getClubDetailsById,
+     getUserClubAffiliationsWithDetails
 } = require("../Controller/clubController");
 
 const {
@@ -23,7 +26,7 @@ const { uploadLogo } = require('../middleware/uploadMiddleware');
 
 
 router.get('/', getAllClubs);
-router.get('/:id', getClubDetails);
+router.get('/', getClubDetails);
 router.post(
     '/create',
     auth,
@@ -34,8 +37,8 @@ router.post(
 router.post(
     '/add-member', 
     auth, 
-    authorize([ 'clubAdmin']), 
-    addMemberToClub
+    authorize([ 'superAdmin']), 
+   assignRoleToClubMember
 );
 
 
@@ -68,5 +71,8 @@ router.post(
     authorize(['clubAdmin']),
     respondToJoinRequest
 );
+
+router.get('/:clubId', auth, authorize(['member', 'clubAdmin', 'superAdmin']), getClubDetailsById);
+router.get('/user-club/:userId',auth,authorize(['member', 'clubAdmin', 'superAdmin','facultyCoordinater']),getUserClubAffiliationsWithDetails)
 
 module.exports = router;

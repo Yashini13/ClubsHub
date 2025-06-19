@@ -21,6 +21,8 @@ import ActivityPage from "./Pages/Activity";
 import CreateAnnouncement from "./Pages/CreateAnnouncement";
 import EditAnnouncement from "./Pages/EditAnnouncement";
 import ListAnnouncement from "./Pages/ListAnnouncements";
+import CreateCompetition from "./Pages/CreateCompetition";
+import MyActivity from "./Pages/Myactivity";
 
 const AppContent = () => {
   const location = useLocation();
@@ -45,6 +47,15 @@ const AppContent = () => {
           }
         />
 
+         <Route
+          path="/competition/:id"
+          element={
+            <PrivateRoute roles={["clubAdmin"]}>
+              <CreateCompetition />
+            </PrivateRoute>
+          }
+        />
+
         <Route
           path="/admin-dashboard"
           element={
@@ -61,6 +72,7 @@ const AppContent = () => {
             </PrivateRoute>
           }
         />
+
 
 
 <Route  path='/faculty-coordinater-dashboard' 
@@ -110,6 +122,14 @@ const AppContent = () => {
   element={
     <PrivateRoute roles={["clubAdmin", "superAdmin"]}>
       <CreateAnnouncement />
+    </PrivateRoute>
+  }
+/>
+<Route
+  path="/my-activity"
+  element={
+    <PrivateRoute  roles={["superAdmin", "member", "clubAdmin","facultyCoordinator"]}>
+      <MyActivity />
     </PrivateRoute>
   }
 />
