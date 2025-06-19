@@ -1,0 +1,57 @@
+steps:
+# Step 1: Build and push backend
+- name: 'gcr.io/cloud-builders/docker'
+  dir: 'backend'
+  args: [
+    'build',
+    '-t', 'us-central1-docker.pkg.dev/$unique-source-444504-k9/mern-repo/backend:$COMMIT_SHA',
+    '.'
+  ]
+
+- name: 'gcr.io/cloud-builders/docker'
+  args: [
+    'push',
+    'us-central1-docker.pkg.dev/$unique-source-444504-k9/mern-repo/backend:$COMMIT_SHA'
+  ]
+
+# Step 2: Build and push frontend
+- name: 'gcr.io/cloud-builders/docker'
+  dir: 'frontend'
+  args: [
+    'build',
+    '-t', 'us-central1-docker.pkg.dev/$unique-source-444504-k9/mern-repo/frontend:$COMMIT_SHA',
+    '.'
+  ]
+
+- name: 'gcr.io/cloud-builders/docker'
+  args: [
+    'push',
+    'us-central1-docker.pkg.dev/$unique-source-444504-k9/mern-repo/frontend:$COMMIT_SHA'
+  ]
+
+# Step 3: Deploy backend to Cloud Run
+- name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+  entrypoint: gcloud
+  args:
+    [
+      'run', 'deploy', 'mern-backend',
+      '--image', 'us-central1-docker.pkg.dev/$unique-source-444504-k9/mern-repo/backend:$COMMIT_SHA',
+      '--region', 'us-central1',
+      '--platform', 'managed',
+      '--set-secrets', 'MONGODB_URI=backend-env:latest',
+      '--allow-unauthenticated',
+      '--port', '8080'
+    ]
+
+# Step 4: Deploy frontend to Cloud Run
+- name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+  entrypoint: gcloud
+  args:
+    [
+      'run', 'deploy', 'mern-frontend',
+      '--image', 'us-central1-docker.pkg.dev/$unique-source-444504-k9/mern-repo/frontend:$COMMIT_SHA',
+      '--region', 'us-central1',
+      '--platform', 'managed',
+      '--allow-unauthenticated',
+      '--port', '3000'
+    ]
