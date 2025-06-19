@@ -18,14 +18,12 @@ import FacultyDashboard from "./Pages/FacultyDashboard";
 import SuperAdminDashboard from "./Pages/SuperAdminDashboard"
 import CreateEvent from "./components/CreateEvent";
 import Calendar from "./components/Calender";
-import MyActivity from "./Pages/Activity.jsx"
-import { Activity } from "lucide-react";
-
+import ActivityPage from "./Pages/Activity";
 import CreateAnnouncement from "./Pages/CreateAnnouncement";
 import EditAnnouncement from "./Pages/EditAnnouncement";
 import ListAnnouncement from "./Pages/ListAnnouncements";
-
-
+import CreateCompetition from "./Pages/CreateCompetition";
+import MyActivity from "./Pages/Myactivity";
 
 const AppContent = () => {
   const location = useLocation();
@@ -46,6 +44,15 @@ const AppContent = () => {
           element={
             <PrivateRoute roles={["clubAdmin"]}>
               <CreateEvent />
+            </PrivateRoute>
+          }
+        />
+
+         <Route
+          path="/competition/:id"
+          element={
+            <PrivateRoute roles={["clubAdmin"]}>
+              <CreateCompetition />
             </PrivateRoute>
           }
         />
@@ -85,6 +92,7 @@ const AppContent = () => {
           }
         />
 
+
 <Route  path='/faculty-coordinater-dashboard' 
           element={
             <PrivateRoute roles={['facultyCoordinator']}>
@@ -100,7 +108,14 @@ const AppContent = () => {
             </PrivateRoute>
           }
           />
-
+          <Route
+          path="/activity"
+          element={
+            <PrivateRoute roles={["member"]}>
+              <ActivityPage/>
+            </PrivateRoute>
+          }
+        />
 
         <Route
           path="/profile"
@@ -128,6 +143,14 @@ const AppContent = () => {
     </PrivateRoute>
   }
 />
+<Route
+  path="/my-activity"
+  element={
+    <PrivateRoute  roles={["superAdmin", "member", "clubAdmin","facultyCoordinator"]}>
+      <MyActivity />
+    </PrivateRoute>
+  }
+/>
 
 
 <Route
@@ -148,12 +171,6 @@ const AppContent = () => {
     </PrivateRoute>
   }
 /> */}
-
-
-
-
-
-
 
 
         <Route path="/clubs" element={<Clubs />} />

@@ -173,8 +173,9 @@ const ClubDetails = () => {
       }
     
       try {
-        const response = await api.get(`/club/${id}`);
-        const clubs = response.data.data;
+        const response = await api.get(`/club`);
+        console.log("club data",response)
+        const clubs = response.data;
     
         if (!clubs || !Array.isArray(clubs)) {
           throw new Error('No club data received or invalid structure');
@@ -323,8 +324,7 @@ const ClubDetails = () => {
   };
 
   const viewAllAnnouncements = () => {
-   
-    console.log("View all announcements for club:", id);
+   navigate("/announcement")
   };
 
   if (isLoading) return <LoadingSpinner />;

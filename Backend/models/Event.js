@@ -1,17 +1,17 @@
 
-
 const mongoose = require('mongoose');
 const { Schema } = mongoose;
+
 
 const EventSchema = new Schema({
   name: { type: String, required: true },
   description: { type: String, required: true },
-  clubId: { type: Schema.Types.ObjectId, ref: 'Club', required: true }, 
+  clubId: { type: Schema.Types.ObjectId, ref: 'Club', required: true },
   date: { type: Date, required: true },
   venue: { type: String },
   duration: { type: Number, required: true },
-  tags: { type: [String], default: [] }, 
-  fees: { type: Number, default: 0 }, 
+  tags: { type: [String], default: [] },
+  fees: { type: Number, default: 0 },
   maxParticipants: { type: Number },
   registrationDeadline: { type: Date },
   platformLink: { type: String },
@@ -23,8 +23,10 @@ const EventSchema = new Schema({
       type: String,
       enum: ['PENDING', 'CONFIRMED', 'CANCELLED', 'ATTENDED'],
       default: 'PENDING'
-    }
-  }],
+    },
+    isTeamLeader: { type: Boolean, default: false },
+    teamId: { type: Schema.Types.ObjectId, ref: 'Team' } 
+  }],  
   eventType: {
     type: String,
     enum: ['WORKSHOP', 'SEMINAR', 'COMPETITION', 'MEETUP', 'CULTURAL', 'TECHNICAL', 'OTHER'],
@@ -35,16 +37,11 @@ const EventSchema = new Schema({
     enum: ['ONLINE', 'OFFLINE', 'HYBRID'],
     required: true
   },
-  status: {
-    type: String,
-    enum: ['UPCOMING', 'ONGOING', 'COMPLETED', 'CANCELLED'],
-    default: 'UPCOMING'
-  },
   createdBy: { type: Schema.Types.ObjectId, ref: 'User', required: true },
   attachments: [{ type: String }],
   createdAt: { type: Date, default: Date.now },
   updatedAt: { type: Date, default: Date.now },
-  departmentsAllowed: [{ 
+  departmentsAllowed: [{
     type: String,
     required: true
   }],
@@ -64,9 +61,40 @@ const EventSchema = new Schema({
     remark: { type: String, default: '' },
     approvedBy: { type: Schema.Types.ObjectId, ref: 'User' },
     approvedAt: { type: Date }
-  }
+  },
 }, {
-  timestamps: true 
+  timestamps: true
 });
 
-module.exports = mongoose.model('Event', EventSchema);
+
+const CompetitionSchema = new Schema({
+  event: { type: Schema.Types.ObjectId, ref: 'Event', required: true },  
+  rounds: [{
+    name: { type: String, required: true }, 
+    description: { type: String },  
+    date: { type: Date },  
+    duration: { type: Number, required: true }, 
+    isLive: { type: Boolean, default: false } 
+  }],
+  prizes: [{
+    position: { type: Number, required: true },  
+    reward: { type: String, required: true }  
+  }],
+  teamAllowed: { type: Boolean, default: false }, 
+  teamSizeLimit: { type: Number },
+  judges: [{
+    name: { type: String, required: true },
+    profile: { type: String }, 
+  
+  }],
+  evaluationCriteria: { type: String }, 
+  rules: [{ type: String }],  
+
+}, {
+  timestamps: true
+});
+
+module.exports = {
+  Event: mongoose.model('Event', EventSchema),
+  Competition: mongoose.model('Competition', CompetitionSchema)
+};

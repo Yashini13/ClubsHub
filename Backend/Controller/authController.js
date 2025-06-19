@@ -2,6 +2,7 @@ const User = require('../models/User');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 const { JWT_SECRET, JWT_EXPIRATION, UserRoles } = require('../config/constants');
+const Club=require("../models/Club")
 
 const generateToken = (user) => {
   const payload = {
@@ -152,8 +153,9 @@ exports.login = async (req, res) => {
 
 exports.getUserProfile = async (req, res) => {
   try {
+   
+    
     const token = getTokenFromRequest(req);
-  
     if (!token) {
       return res.status(401).json({ message: 'Not authenticated' });
     }
@@ -171,6 +173,7 @@ exports.getUserProfile = async (req, res) => {
     res.json({
       message: 'User profile fetched successfully',
       user: {
+        _id: user._id,
         name: user.name,
         email: user.email,
         role: user.role,
@@ -292,5 +295,181 @@ exports.getUserDetails = async (req, res) => {
 };
 
 
+exports.updateProfilePicture = async (req, res) => {
+  try {
+    const token = getTokenFromRequest(req);
+    if (!token) {
+      return res.status(401).json({ message: 'Not authenticated' });
+    }
+    
+    const decoded = jwt.verify(token, JWT_SECRET);
+    const user = await User.findById(decoded.id);
+    
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+    
+    if (!req.file) {
+      return res.status(400).json({ message: 'No profile picture provided' });
+    }
+    
+    const profilePicturePath = `/${req.file.path.replace(/\\/g, '/')}`;
+    
+   
+    if (user.image && user.image !== profilePicturePath && user.image !== '') {
+      try {
+        const oldImagePath = path.join(__dirname, '..', user.image.substring(1));
+        if (fs.existsSync(oldImagePath)) {
+          fs.unlinkSync(oldImagePath);
+        }
+      } catch (err) {
+        console.log('Error deleting old image: ', err.message);
+       
+      }
+    }
+    
+  
+    user.image = profilePicturePath;
+    console.log("user", user);
+   
+    await user.save();
+    
+    return res.status(200).json({
+      message: "Profile picture updated successfully",
+      user: {
+        name: user.name,
+        email: user.email,
+        role: user.role,
+        department: user.department,
+        year: user.year,
+        clubAffiliations: user.clubAffiliations,
+        image: user.image,
+        lastLogin: user.lastLogin,
+        isActive: user.isActive
+      }
+    });
+  } catch (error) {
+    console.error('Profile picture update error:', error);
+    res.status(500).json({
+      message: 'Failed to update profile picture',
+      error: error.message,
+    });
+  }
+};
+
+
+exports.searchUsers = async (req, res) => {
+  try {
+    const { query } = req.query;
+    
+   
+    if (!query || query.length < 3) {
+      return res.status(400).json({
+        success: false,
+        message: 'Search query must be at least 3 characters long'
+      });
+    }
+
+   
+    const currentUserId = req.user.id;
+
+
+    const searchRegex = new RegExp(query, 'i');
+
+   
+    const users = await User.find({
+      _id: { $ne: currentUserId }, 
+      $or: [
+        { name: searchRegex },
+        { email: searchRegex }
+      ]
+    })
+    .select('_id name email profileImage')
+    .limit(10); 
+
+    return res.status(200).json({
+      success: true,
+      message: 'Users retrieved successfully',
+      data: users
+    });
+  } catch (error) {
+    console.error('User search error:', error);
+    return res.status(500).json({
+      success: false,
+      message: 'Error searching for users',
+      error: process.env.NODE_ENV === 'development' ? error.message : 'Internal server error'
+    });
+  }
+};
+
+
+exports.getAllUsers = async (req, res) => {
+  try {
+   
+    const users = await User.find({}).select('name email role department year clubAffiliations image isActive lastLogin createdAt');
+    
+    return res.status(200).json({
+      success: true,
+      count: users.length,
+      data: users
+    });   
+  } catch (err) {
+    console.error('Error fetching users:', err);
+    return res.status(500).json({
+      success: false,
+      message: 'Error fetching users',
+      error: err.message
+    });
+  }
+};
+
+
+exports.getEligibleUsers = async (req, res) => {
+    try {
+        const requestingUser = req.user;
+
+      
+        if (requestingUser.role !== 'superAdmin') {
+            return res.status(403).json({
+                message: 'Only super admins can fetch eligible users'
+            });
+        }
+
+        const { clubId } = req.query;
+
+        if (!clubId) {
+            return res.status(400).json({
+                message: 'Club ID is required'
+            });
+        }
+
+      
+        const club = await Club.findOne({ _id: clubId, isActive: true });
+
+        if (!club) {
+            return res.status(404).json({ message: 'Club not found or inactive' });
+        }
+
+        const existingMemberIds = club.clubMembers.map(member => member.student.toString());
+
+        
+        const eligibleUsers = await User.find({
+            _id: { $nin: existingMemberIds },
+            isActive: true
+        }).select('_id name email role');
+
+        res.status(200).json({
+            message: 'Eligible users fetched successfully',
+            eligibleUsers
+        });
+
+    } catch (error) {
+        console.error('Error fetching eligible users:', error);
+        res.status(500).json({
+            message: 'Error fetching eligible users',
+            error: error.message
+        });
+    }
+};
 
 

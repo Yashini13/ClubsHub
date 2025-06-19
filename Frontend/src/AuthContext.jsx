@@ -1,6 +1,3 @@
-
-
-
 import React, { createContext, useState, useEffect, useCallback } from 'react';
 import axios from './api';
 
@@ -14,10 +11,10 @@ export const AuthProvider = ({ children }) => {
     try {
       const response = await axios.post('/auth/login', { email, password });
       
-      console.log('Login response:', response.data);
+    
       
       const userData = response.data.user;
-      console.log("userData",userData)
+     
       const token = response.data.token;
       
       setUser(userData);
@@ -26,8 +23,7 @@ export const AuthProvider = ({ children }) => {
       
       localStorage.setItem('user', JSON.stringify(userData));
       
-      console.log('Token in localStorage after login:', localStorage.getItem('token'));
-      console.log('User set after login:', userData);
+     
 
       return userData;
     } catch (error) {
@@ -53,26 +49,26 @@ export const AuthProvider = ({ children }) => {
       const token = localStorage.getItem('token');
       const cachedUser = localStorage.getItem('user');
       
-      // First try to set user from localStorage if available
+  
       if (cachedUser) {
         setUser(JSON.parse(cachedUser));
       }
       
       if (token) {
-        // Then refresh from server
+     
         const response = await axios.get('/auth/profile', {
           headers: { Authorization: `Bearer ${token}` },
         });
 
-        console.log('Profile response:', response.data);
+     
 
         const userData = response.data.user;
         setUser(userData);
         
-        // Update the cached user
+        
         localStorage.setItem('user', JSON.stringify(userData));
         
-        console.log('User set after fetching profile:', userData);
+       
       } else {
         console.log('No token found in localStorage');
       }
@@ -80,7 +76,7 @@ export const AuthProvider = ({ children }) => {
       console.error('Failed to fetch profile:', error.response?.data?.message || error.message);
       logout();
     } finally {
-      // This finally block should be outside the if condition
+    
       setLoading(false);
     }
   }, [logout]);
