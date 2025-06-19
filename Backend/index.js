@@ -67,7 +67,7 @@ const authRoutes = require('./routes/authRoutes'); // Auth (including Google)
 const clubRoutes = require('./routes/clubRoutes');
 const eventRoutes = require('./routes/eventRoutes');
 const competitionRoutes = require('./routes/competitionRoute');
-
+const announcement=require('./routes/announcementRoutes')
 
 const app = express();
 
@@ -111,6 +111,9 @@ app.use('/api/auth', authRoutes);  // Now includes Google OAuth
 app.use('/api/club', clubRoutes);
 app.use('/api/event', eventRoutes);
 app.use('/api/competitions', competitionRoutes);
+app.use('/api/announcement',announcement);
+
+
 
 // Error Handling Middleware
 app.use((err, req, res, next) => {

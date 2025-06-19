@@ -1,6 +1,3 @@
-
-
-
 import axios from 'axios';
 
 const api = axios.create({
@@ -17,3 +14,14 @@ api.interceptors.request.use((config) => {
 });
 
 export default api;
+
+
+// import axios from 'axios';
+
+// const instance = axios.create({
+//   baseURL: 'http://localhost:3000', 
+//   withCredentials: true, 
+// });
+
+// export default instance;
+

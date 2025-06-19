@@ -10,6 +10,7 @@ const Navbar = () => {
 
   const allNavItems = [
     { name: 'Events', icon: <Calendar className="w-5 h-5" />, path: '/events' },
+    { name: 'Clubs', icon: <Users className="w-5 h-5" />, path: '/clubs' },
     { name: 'My Club', icon: <BookOpen className="w-5 h-5" />, path: '/my-clubs' },
     { name: 'Announcements', icon: <Newspaper className="w-5 h-5" />, path: '/announcements' },
     { name: 'Clubs', icon: <Users className="w-5 h-5" />, path: '/clubs' },

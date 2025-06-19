@@ -346,7 +346,7 @@ const Register = () => {
     if (!formData.year.trim()) {
       throw new Error('Year is required');
     }
-  };
+  }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
