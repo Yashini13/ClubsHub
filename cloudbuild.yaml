@@ -7,14 +7,14 @@ steps:
   dir: 'Backend'
   args: [
     'build',
-    '-t', 'us-central1-docker.pkg.dev/$PROJECT_ID/mern-repo/backend:$COMMIT_SHA',
+    '-t', 'us-central1-docker.pkg.dev/$PROJECT_ID/mern-repo/backend:{$COMMIT_SHA}',
     '.'
   ]
 
 - name: 'gcr.io/cloud-builders/docker'
   args: [
     'push',
-    'us-central1-docker.pkg.dev/$PROJECT_ID/mern-repo/backend:$COMMIT_SHA'
+    'us-central1-docker.pkg.dev/$PROJECT_ID/mern-repo/backend:{$COMMIT_SHA}'
   ]
 
 # Step 2: Build and push frontend
@@ -22,14 +22,14 @@ steps:
   dir: 'Frontend'
   args: [
     'build',
-    '-t', 'us-central1-docker.pkg.dev/$PROJECT_ID/mern-repo/frontend:$COMMIT_SHA',
+    '-t', 'us-central1-docker.pkg.dev/$PROJECT_ID/mern-repo/frontend:{$COMMIT_SHA}',
     '.'
   ]
 
 - name: 'gcr.io/cloud-builders/docker'
   args: [
     'push',
-    'us-central1-docker.pkg.dev/$PROJECT_ID/mern-repo/frontend:$COMMIT_SHA'
+    'us-central1-docker.pkg.dev/$PROJECT_ID/mern-repo/frontend:{$COMMIT_SHA}'
   ]
 
 # Step 3: Deploy backend to Cloud Run
@@ -38,7 +38,7 @@ steps:
   args:
     [
       'run', 'deploy', 'mern-backend',
-      '--image', 'us-central1-docker.pkg.dev/$PROJECT_ID/mern-repo/backend:$COMMIT_SHA',
+      '--image', 'us-central1-docker.pkg.dev/$PROJECT_ID/mern-repo/backend:{$COMMIT_SHA}',
       '--region', 'us-central1',
       '--platform', 'managed',
       '--set-secrets', 'MONGODB_URI=backend-env:latest',
@@ -52,7 +52,7 @@ steps:
   args:
     [
       'run', 'deploy', 'mern-frontend',
-      '--image', 'us-central1-docker.pkg.dev/$PROJECT_ID/mern-repo/frontend:$COMMIT_SHA',
+      '--image', 'us-central1-docker.pkg.dev/$PROJECT_ID/mern-repo/frontend:{$COMMIT_SHA}',
       '--region', 'us-central1',
       '--platform', 'managed',
       '--allow-unauthenticated',
