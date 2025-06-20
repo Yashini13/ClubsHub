@@ -41,9 +41,10 @@ steps:
       '--image', 'us-central1-docker.pkg.dev/${PROJECT_ID}/mern-repo/backend:${COMMIT_SHA}',
       '--region', 'us-central1',
       '--platform', 'managed',
-      '--set-secrets', 'MONGODB_URI=backend-env:latest',
       '--allow-unauthenticated',
-      '--port', '8080'
+      '--port', '8080',
+      '--set-env-vars', 'ENV_FILE=/secrets/backend-env',
+      '--mount', 'type=secret,source=backend-env,target=/secrets/backend-env'
     ]
 
 # Step 4: Deploy frontend to Cloud Run

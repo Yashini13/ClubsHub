@@ -122,6 +122,7 @@
 const express = require('express');
 const cors = require('cors');
 const connectDB = require('./config/db');
+require('dotenv').config({ path: process.env.ENV_FILE || '.env' });
 
 
 const authRoutes = require('./routes/authRoutes');
