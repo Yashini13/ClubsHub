@@ -43,7 +43,7 @@ steps:
       '--platform', 'managed',
       '--allow-unauthenticated',
       '--port', '8080',
-      '--set-env-vars', 'ENV_FILE=/secrets/backend-env',
+      '--set-secrets', 'MONGODB_URI=mongodb-uri:latest,GOOGLE_CLIENT_ID=google-client-id:latest,GOOGLE_CLIENT_SECRET=google-client-secret:latest, JWT=jwt-id:latest',
       '--mount', 'type=secret,source=backend-env,target=/secrets/backend-env'
     ]
 
