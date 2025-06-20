@@ -137,6 +137,7 @@ connectDB();
 
 const cookieParser = require('cookie-parser');
 app.use(cookieParser());
+app.use(express.urlencoded({ extended: true }));
 
 app.use(cors({
   origin: 'http://localhost:5173',
@@ -165,7 +166,7 @@ app.use((err, req, res, next) => {
   });
 });
 
-const PORT = process.env.PORT ; //process.env.PORT || 3000
+const PORT = process.env.PORT || 3000 ; //process.env.PORT || 3000
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
