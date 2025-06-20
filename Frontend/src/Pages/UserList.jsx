@@ -176,7 +176,7 @@ const UserList = () => {
     user?.name?.charAt(0)?.toUpperCase()
   ) : (
     <img 
-      src={`http://localhost:3000${user.image}`} 
+      src={`https://mern-backend-172407736127.us-central1.run.app${user.image}`} 
       alt="profile" 
       className="w-full h-full object-cover rounded-full"
     />

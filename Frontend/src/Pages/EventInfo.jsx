@@ -109,7 +109,7 @@
 //       <div className="relative h-[50vh] md:h-[60vh] overflow-hidden">
 //         {event.eventBanner ? (
 //           <img
-//             src={`http://localhost:3000/${event.eventBanner.replace(/\\/g, '/')}`}
+//             src={`https://mern-backend-172407736127.us-central1.run.app/${event.eventBanner.replace(/\\/g, '/')}`}
 //             alt={event.name}
 //             className="w-full h-full object-cover"
 //           />
@@ -146,7 +146,7 @@
               
 //               <div className="flex items-center space-x-4">
 //                 <img
-//                   src={`http://localhost:3000/${event.clubId.clubLogo.replace(/\\/g, '/')}`}
+//                   src={`https://mern-backend-172407736127.us-central1.run.app/${event.clubId.clubLogo.replace(/\\/g, '/')}`}
 //                   alt={event.clubId.name}
 //                   className="h-10 w-10 rounded-full object-cover ring-2 ring-gray-100"
 //                 />
@@ -478,7 +478,7 @@ const EventInfo = () => {
     if (!path) return null;
     // Remove backslashes and handle potential URL construction issues
     const cleanPath = path.replace(/\\/g, '/');
-    return `${import.meta.env.VITE_API_URL || 'http://localhost:3000'}/${cleanPath}`;
+    return `${import.meta.env.VITE_API_URL || 'https://mern-backend-172407736127.us-central1.run.app'}/${cleanPath}`;
   };
 
   return (

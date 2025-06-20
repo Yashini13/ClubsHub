@@ -344,7 +344,7 @@ const ClubDetails = () => {
                 <div className="relative group">
                   <div className="absolute inset-0 bg-gradient-to-br from-blue-400 to-violet-400 rounded-2xl blur-lg opacity-20 transition-opacity group-hover:opacity-30" />
                   <img
-                    src={`http://localhost:3000/${club.clubLogo?.replace(/\\/g, '/')}`}
+                    src={`https://mern-backend-172407736127.us-central1.run.app/${club.clubLogo?.replace(/\\/g, '/')}`}
                     alt={`${club.name} Logo`}
                     className="relative h-40 w-40 rounded-2xl object-cover ring-4 ring-white shadow-lg transition-transform group-hover:scale-105"
                     onError={(e) => {

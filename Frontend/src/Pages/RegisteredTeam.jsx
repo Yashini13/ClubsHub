@@ -19,7 +19,7 @@ const ProfileImage = ({ src, name, size = "w-8 h-8" }) => {
   const [imageError, setImageError] = useState(false);
   
 
-  const imageUrl = src ? `${src.startsWith('http') ? src : `http://localhost:3000${src}`}` : null;
+  const imageUrl = src ? `${src.startsWith('http') ? src : `https://mern-backend-172407736127.us-central1.run.app${src}`}` : null;
   
   if (!imageUrl || imageError) {
     return (

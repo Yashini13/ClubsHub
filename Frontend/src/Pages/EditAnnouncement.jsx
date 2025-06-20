@@ -10,7 +10,7 @@ const EditAnnouncement = ({ announcementId, initialData, onUpdated, onCancel }) 
   const [attachments, setAttachments] = useState([]);
   const [existingAttachments, setExistingAttachments] = useState([]);
   const [uploading, setUploading] = useState(false);
-  const baseURL = "http://localhost:3000";
+  const baseURL = "https://mern-backend-172407736127.us-central1.run.app";
   
   useEffect(() => {
     // If initialData is provided, use it to populate the form

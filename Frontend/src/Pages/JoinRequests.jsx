@@ -5,7 +5,7 @@ const JoinRequests = ({ joinRequests, loading, error }) => {
   const getLogoUrl = (logoPath) => {
     if (!logoPath) return null;
     const cleanPath = logoPath.replace(/\\/g, '/');
-    return `http://localhost:3000/${cleanPath}`;
+    return `https://mern-backend-172407736127.us-central1.run.app/${cleanPath}`;
   };
 
   const getStatusColor = (status) => {

@@ -52,7 +52,7 @@ const ParticipantRow = ({ participant, eventName }) => {
     participant.name.split(' ').map(n => n[0]).join('').substring(0, 2)
   ) : (
     <img 
-      src={`http://localhost:3000${participant.image}`} 
+      src={`https://mern-backend-172407736127.us-central1.run.app${participant.image}`} 
       alt="profile"
       className="w-full h-full object-cover"
     />

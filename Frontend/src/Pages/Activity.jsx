@@ -28,7 +28,7 @@ const ActivityPage = () => {
   const getAllActivities = async () => {
     setIsLoading(true);
     try {
-      const response = await fetch('http://localhost:3000/api/competitions/:id', {
+      const response = await fetch('https://mern-backend-172407736127.us-central1.run.app/api/competitions/:id', {
       credentials: 'include'
     });
         if (!response.ok) {
@@ -131,7 +131,7 @@ const ActivityPage = () => {
               >
                 <div className="relative h-64 overflow-hidden">
                   <img
-                    src={`http://localhost:3000/${activity.activityBanner.replace(/\\/g, '/')}`}
+                    src={`https://mern-backend-172407736127.us-central1.run.app/${activity.activityBanner.replace(/\\/g, '/')}`}
                     alt={`${activity.name} banner`}
                     className="w-full h-full object-cover transform transition-transform duration-700 ease-out group-hover:scale-110"
                   />

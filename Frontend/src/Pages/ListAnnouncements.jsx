@@ -24,7 +24,7 @@ const ListAnnouncement = () => {
   const [clubs, setClubs] = useState({});
   const [creators, setCreators] = useState({});
   const { user } = useContext(AuthContext);
-  const baseURL = "http://localhost:3000";
+  const baseURL = "https://mern-backend-172407736127.us-central1.run.app";
   
   const hasAdminAccess = user && (user.role === 'clubAdmin' || user.role === 'superAdmin');
 

@@ -28,7 +28,7 @@ const Clubs = () => {
   const getAllClubs = async () => {
     setIsLoading(true);
     try {
-      const response = await fetch('http://localhost:3000/api/club', {
+      const response = await fetch('https://mern-backend-172407736127.us-central1.run.app/api/club', {
         credentials: 'include'
       });
       const data = await response.json();
@@ -132,7 +132,7 @@ const Clubs = () => {
               >
                 <div className="relative h-64 overflow-hidden">
                   <img
-                    src={`http://localhost:3000/${club.clubLogo.replace(/\\/g, '/')}`}
+                    src={`https://mern-backend-172407736127.us-central1.run.app/${club.clubLogo.replace(/\\/g, '/')}`}
                     alt={`${club.name} banner`}
                     className="w-full h-full object-cover transform transition-transform duration-700 ease-out group-hover:scale-110"
                   />

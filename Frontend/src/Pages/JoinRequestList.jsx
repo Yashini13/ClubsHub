@@ -168,7 +168,7 @@ const JoinRequestsList = () => {
                  <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center text-white font-semibold text-lg overflow-hidden">
   {request.userId.image ? (
     <img 
-      src={`http://localhost:3000${request.userId.image}`} 
+      src={`https://mern-backend-172407736127.us-central1.run.app${request.userId.image}`} 
       alt="profile"
       className="w-full h-full "
     />

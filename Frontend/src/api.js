@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const api = axios.create({
-  baseURL: 'http://localhost:3000/api',
+  baseURL: 'https://mern-backend-172407736127.us-central1.run.app/api',
   withCredentials: true,
 });
 
@@ -22,7 +22,7 @@ export default api;
 // import axios from 'axios';
 
 // const instance = axios.create({
-//   baseURL: 'http://localhost:3000', 
+//   baseURL: 'https://mern-backend-172407736127.us-central1.run.app', 
 //   withCredentials: true, 
 // });
 

@@ -56,7 +56,7 @@ router.get('/google/callback', passport.authenticate('google', { session: false 
   });
 
   // Redirect user to frontend after login
-  res.redirect('http://localhost:5173/member-dashboard'); // Update to your frontend URL
+  res.redirect('https://mern-frontend-172407736127.us-central1.run.app/member-dashboard'); // Update to your frontend URL
 });
 
 module.exports = router;

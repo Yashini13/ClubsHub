@@ -24,7 +24,7 @@
 // //   useEffect(() => {
 // //     const fetchClubs = async () => {
 // //       try {
-// //         const response = await axios.get('http://localhost:3000/api/club');
+// //         const response = await axios.get('https://mern-backend-172407736127.us-central1.run.app/api/club');
 // //         setClubs(response.data);
 // //       } catch (error) {
 // //         console.error('Error fetching clubs:', error);
@@ -61,7 +61,7 @@
 
 // //     try {
 // //       validateForm();
-// //       await axios.post('http://localhost:3000/api/auth/register', formData);
+// //       await axios.post('https://mern-backend-172407736127.us-central1.run.app/api/auth/register', formData);
 // //       navigate('/login');
 // //     } catch (error) {
 // //       setError(error.response?.data?.message || error.message || 'Registration failed');
@@ -320,7 +320,7 @@
 //   useEffect(() => {
 //     const fetchClubs = async () => {
 //       try {
-//         const response = await axios.get('http://localhost:3000/api/club');
+//         const response = await axios.get('https://mern-backend-172407736127.us-central1.run.app/api/club');
 //         setClubs(response.data);
 //       } catch (error) {
 //         console.error('Error fetching clubs:', error);
@@ -355,7 +355,7 @@
 
 //     try {
 //       validateForm();
-//       await axios.post('http://localhost:3000/api/auth/register', formData);
+//       await axios.post('https://mern-backend-172407736127.us-central1.run.app/api/auth/register', formData);
 //       navigate('/login');
 //     } catch (error) {
 //       setError(error.response?.data?.message || error.message || 'Registration failed');
@@ -366,7 +366,7 @@
 //   };
 
 //   const handleGoogleSignUp = () => {
-//     window.location.href = 'http://localhost:3000/api/auth/google';
+//     window.location.href = 'https://mern-backend-172407736127.us-central1.run.app/api/auth/google';
 //   };
 
 //   return (
@@ -574,7 +574,7 @@ const Register = () => {
   useEffect(() => {
     const fetchClubs = async () => {
       try {
-        const response = await axios.get('http://localhost:3000/api/club');
+        const response = await axios.get('https://mern-backend-172407736127.us-central1.run.app/api/club');
         setClubs(response.data);
       } catch (error) {
         console.error('Error fetching clubs:', error);
@@ -609,7 +609,7 @@ const Register = () => {
 
     try {
       validateForm();
-      await axios.post('http://localhost:3000/api/auth/register', formData);
+      await axios.post('https://mern-backend-172407736127.us-central1.run.app/api/auth/register', formData);
       navigate('/login');
     } catch (error) {
       setError(error.response?.data?.message || error.message || 'Registration failed');

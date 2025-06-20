@@ -32,7 +32,7 @@
 //     try {
 //       validateForm();
 
-//       const response = await axios.post('http://localhost:3000/api/auth/login', {
+//       const response = await axios.post('https://mern-backend-172407736127.us-central1.run.app/api/auth/login', {
 //         email: formData.email,
 //         password: formData.password
 //       });
@@ -237,7 +237,7 @@ const Login = () => {
     try {
       validateForm();
 
-      const response = await axios.post('http://localhost:3000/api/auth/login', {
+      const response = await axios.post('https://mern-backend-172407736127.us-central1.run.app/api/auth/login', {
         email: formData.email,
         password: formData.password
       });
@@ -277,7 +277,7 @@ const Login = () => {
   };
 
   const handleGoogleLogin = () => {
-    window.location.href = 'http://localhost:3000/api/auth/google'; // Redirect to backend Google OAuth route
+    window.location.href = 'https://mern-backend-172407736127.us-central1.run.app/api/auth/google'; // Redirect to backend Google OAuth route
   };
 
   const handleInputChange = (e) => {
