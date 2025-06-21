@@ -96,7 +96,7 @@ const { uploadLogo } = require('../middleware/uploadMiddleware');
 // Check that getUserClubs exists before using it here
 // router.get('/user/my-clubs', auth, getUserClubs);
 
-router.get('/', getAllClubs);
+// router.get('/', getAllClubs);
 router.get('/', getClubDetails);
 router.post(
     '/create',
